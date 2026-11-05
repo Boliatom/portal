@@ -26,6 +26,10 @@ class Role(models.Model):
 class Module(models.Model):
     id = models.BigAutoField(primary_key=True, db_column='module_id')
     name = models.CharField(max_length=255, unique=True, db_column='module_name')
+    code = models.CharField(max_length=64, unique=True, db_column='module_code')
+    url = models.CharField(max_length=500, db_column='module_url')
+    tag = models.CharField(max_length=100, db_column='module_tag')
+    enabled = models.BooleanField(default=True, db_column='module_enabled')
     class Meta:
         managed = False
         db_table = 'modules'

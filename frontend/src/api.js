@@ -15,6 +15,17 @@ export async function login(username, password) {
   localStorage.setItem('token', data.token);
 }
 
+export async function getModules() {
+  try {
+    const res = await fetch('/api/modules/', {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
+    });
+    return res.ok ? (await res.json()).modules : [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getMe() {
   const token = localStorage.getItem('token');
   if (!token) {

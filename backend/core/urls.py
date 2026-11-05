@@ -11,5 +11,5 @@ urlpatterns = [
     path('users/<int:user_id>/groups/', views.user_groups),
     path('groups/<int:group_id>/users/', views.group_users),
     path('check/', views.check_auth),
-    path('modules/', views.module_list),
-]
+    path('modules/', views.modules),
+    path('modules/<int:module_id>/', views.module_toggle),]

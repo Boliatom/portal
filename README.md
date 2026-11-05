@@ -84,3 +84,25 @@ IN (('admin',   'Администратор'),
 
 ALTER TABLE users ADD COLUMN user_first_login TIMESTAMPTZ;
 й
+
+
+Модули (задание 3)
+
+ALTER TABLE modules
+    ADD COLUMN module_code    VARCHAR(64)  UNIQUE,
+    ADD COLUMN module_url     VARCHAR(500) NOT NULL DEFAULT '',
+    ADD COLUMN module_tag     VARCHAR(100) NOT NULL DEFAULT '',
+    ADD COLUMN module_enabled BOOLEAN      NOT NULL DEFAULT TRUE;
+
+Модуль «Объявления» запускается отдельно от ядра:
+
+cd modules/announcements
+python -m http.server 8001
+
+Регистрация модуля (токен из POST /api/login/; в ответе будет id модуля):
+
+curl -X POST http://localhost:8000/api/modules/ -H "Authorization: Bearer <token>" -H "Content-Type: application/json" -d "{\"name\":\"Объявления\",\"code\":\"announcements\",\"url\":\"http://localhost:8001/announcements.js\",\"tag\":\"announcements-module\"}"
+
+Отк или вкл модуль (id из ответа на регистрацию или из таблицы modules):
+
+curl -X PATCH http://localhost:8000/api/modules/<id>/ -H "Authorization: Bearer <token>" -H "Content-Type: application/json" -d "{\"enabled\":false}"
