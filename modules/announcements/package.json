@@ -1,0 +1,17 @@
+{
+  "name": "announcements-module",
+  "private": true,
+  "scripts": {
+    "build": "parcel build src/announcements.jsx --dist-dir dist"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "@parcel/resolver-default": {
+    "packageExports": true
+  }
+}
